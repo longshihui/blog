@@ -1,0 +1,22 @@
+name: Auto Deploy To Github Pages
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    name: build docs by vuepress
+    steps:
+      run: npm run docs:build
+  public:
+    name: public to github pages
+    needs:
+      - build
+    steps:
+      run: cd docs/.vuepress/dist
+      run: git init
+      run: git add .
+      run: git commit -m "发布博客"
+      run: git push -f git@github.com:longshihui/blog.git master:gh-pages
