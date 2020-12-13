@@ -1,18 +1,18 @@
-name: Auto Deploy To Github Pages
-
-on:
+name: Deploy to github pages
+on: 
   push:
-    branches: 
+    branches:
       - master
-
 jobs:
   build:
     name: build docs by vuepress
+    runs-on: ubuntu-latest
     steps:
       - run: yarn
       - run: npm run docs:build
   deploy:
     name: public to github pages
+    runs-on: ubuntu-latest
     needs:
       - build
     steps:
