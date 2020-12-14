@@ -30,9 +30,9 @@ jobs:
             name: vuepress-dist
       - name: view artifact files
         run: ls
+      - run: git init
       - run: git config --local user.name "longshihui"
       - run: git config --local user.email "391424924@qq.com"
-      - run: git init
       - run: git add .
       - run: git commit -m "发布博客"
       - run: git push -f git@github.com:longshihui/blog.git master:gh-pages
