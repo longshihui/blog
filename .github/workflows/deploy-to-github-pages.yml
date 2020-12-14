@@ -5,34 +5,35 @@ on:
       - master
 jobs:
   build:
-    name: build docs by vuepress
+    name: Build docs by vuepress
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: install npm dependencies
+      - name: Install npm dependencies
         run: yarn
       - name: build docs
         run: yarn docs:build
-      - name: upload vuepress build result
+      - name: Upload vuepress build result
         uses: actions/upload-artifact@v2
         with: 
           name: vuepress-dist
           path: docs/.vuepress/dist
   deploy:
-    name: public to github pages
+    name: Deploy to github pages
     runs-on: ubuntu-latest
     needs:
       - build
     steps:
-      - name: download previous build result
+      - name: Download previous build result
         uses: actions/download-artifact@v2
         with:
             name: vuepress-dist
-      - name: view artifact files
+      - name: View artifact files
         run: ls
-      - run: git init
-      - run: git config --local user.name "longshihui"
-      - run: git config --local user.email "391424924@qq.com"
-      - run: git add .
-      - run: git commit -m "发布博客"
-      - run: git push -f git@github.com:longshihui/blog.git master:gh-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          BRANCH: gh-pages
+          FOLDER: .
+          CLEAN: true
