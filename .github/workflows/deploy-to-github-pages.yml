@@ -28,6 +28,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
             name: vuepress-dist
+      - name: view artifact files
+        run: ls
+      - run: git config --local user.name "longshihui"
+      - run: git config --local user.email "391424924@qq.com"
       - run: git init
       - run: git add .
       - run: git commit -m "发布博客"
