@@ -9,15 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn
-      - run: npm run docs:build
+      - name: install npm dependencies
+        run: yarn
+      - name: build docs
+        run: yarn docs:build
+      - name: upload vuepress build result
+        uses: actions/upload-artifact@v2
+        with: 
+          name: vuepress-dist
+          path: docs/.vuepress/dist
   deploy:
     name: public to github pages
     runs-on: ubuntu-latest
     needs:
       - build
     steps:
-      - run: cd docs/.vuepress/dist
+      - name: download previous build result
+        uses: actions/download-artifact@v2
+        with:
+            name: vuepress-dist
       - run: git init
       - run: git add .
       - run: git commit -m "发布博客"
