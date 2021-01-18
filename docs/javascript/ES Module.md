@@ -1,13 +1,14 @@
 ---
-title: 浏览器ES Module
+title: 浏览器ES Module基础
 date: 2020-12-11 17:07:45
 categories:
- - 前端
+ - Web
 tags:
  - Javascript
+ - Web规范
 ---
 
-# 浏览器端ES Module
+# 浏览器端ES Module基础
 
 ES Module在浏览器端使用时，需要搞清楚以下几个问题
 
