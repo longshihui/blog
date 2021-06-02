@@ -252,7 +252,7 @@ export default function BpmnModule({ injects }) {
         function ModuleProxy(...injectedModules) {
             // injectedModules为bpmn-js给的模块实例化列表
             // 创建目标对象
-            const instance = new Target();
+            const instance = new moduleCtor();
             // 将依赖注入变成模块实例私有变量
             injects.forEach((moduleName, index) => {
                 instance['_' + moduleName] = injectedModules[index];
