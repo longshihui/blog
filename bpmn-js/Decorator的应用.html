@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Decorator在bpmn-js中的应用（一） | Colorless的博客</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.5bf11387.css" as="style"><link rel="preload" href="/blog/assets/js/app.03cb820c.js" as="script"><link rel="preload" href="/blog/assets/js/3.c57994e2.js" as="script"><link rel="preload" href="/blog/assets/js/1.385f6529.js" as="script"><link rel="preload" href="/blog/assets/js/11.8c55c784.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.308a4351.js"><link rel="prefetch" href="/blog/assets/js/12.1a40d7c5.js"><link rel="prefetch" href="/blog/assets/js/13.95f7e85f.js"><link rel="prefetch" href="/blog/assets/js/14.4c6def61.js"><link rel="prefetch" href="/blog/assets/js/4.62d4e81f.js"><link rel="prefetch" href="/blog/assets/js/5.1a9b52b4.js"><link rel="prefetch" href="/blog/assets/js/6.f77b6f85.js"><link rel="prefetch" href="/blog/assets/js/7.649525b2.js"><link rel="prefetch" href="/blog/assets/js/8.43740470.js"><link rel="prefetch" href="/blog/assets/js/9.27be69d1.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.5bf11387.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-2d5f533b><div data-v-2d5f533b><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-2d5f533b data-v-2d5f533b><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-64685f0e data-v-2d5f533b data-v-2d5f533b><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>Colorless的博客</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>Colorless的博客</span>
+            
+          <!---->
+          2021
+        </a></span></div></div> <div class="hide" data-v-2d5f533b><header class="navbar" data-v-2d5f533b><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Colorless的博客</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont undefined"></i>
+  首页
+</a></div><div class="nav-item"><a href="https://github.com/longshihui/blog" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-2d5f533b></div> <aside class="sidebar" data-v-2d5f533b><div class="personal-info-wrapper" data-v-ca798c94 data-v-2d5f533b><img src="/blog/author.jpeg" alt="author-avatar" class="personal-img" data-v-ca798c94> <h3 class="name" data-v-ca798c94>
+    Colorless的博客
+  </h3> <div class="num" data-v-ca798c94><div data-v-ca798c94><h3 data-v-ca798c94>2</h3> <h6 data-v-ca798c94>Article</h6></div> <div data-v-ca798c94><h3 data-v-ca798c94>3</h3> <h6 data-v-ca798c94>Tag</h6></div></div> <hr data-v-ca798c94></div> <nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link"><i class="iconfont undefined"></i>
+  首页
+</a></div><div class="nav-item"><a href="https://github.com/longshihui/blog" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-64685f0e data-v-2d5f533b><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>Decorator在bpmn-js中的应用（一）</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>Colorless的博客</span>
+            
+          <!---->
+          2021
+        </a></span></div></div> <div data-v-2d5f533b><main class="page" style="padding-right:0;"><div class="page-title" style="display:none;"><h1 class="title">Decorator在bpmn-js中的应用（一）</h1> <div data-v-3b7f5bdf><i class="iconfont reco-account" data-v-3b7f5bdf><span data-v-3b7f5bdf>Colorless的博客</span></i> <i class="iconfont reco-date" data-v-3b7f5bdf><span data-v-3b7f5bdf>2021-06-02 17:58:26</span></i> <i class="iconfont reco-eye" data-v-3b7f5bdf><span id="/blog/bpmn-js/Decorator%E7%9A%84%E5%BA%94%E7%94%A8.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-3b7f5bdf><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-3b7f5bdf><span class="tag-item" data-v-3b7f5bdf>Javascript</span><span class="tag-item" data-v-3b7f5bdf>Web规范</span><span class="tag-item" data-v-3b7f5bdf>Bpmn-js</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h1 id="decorator在bpmn-js中的应用-一"><a href="#decorator在bpmn-js中的应用-一" class="header-anchor">#</a> Decorator在bpmn-js中的应用（一）</h1> <p>本篇文章主要内容为在使用开源的bpmn-js进行自定义建模器时，js的装饰器模式在编码设计时的应用，以及一些设计技巧。</p> <p>[toc]</p> <h2 id="装饰器的基础知识"><a href="#装饰器的基础知识" class="header-anchor">#</a> 装饰器的基础知识</h2> <p>如果是开发React的小伙伴或者是使用ts编写vue2.0的来进行开发的小伙伴肯定对装饰器很熟悉。</p> <p>它主要用来修饰es6里的class，也就是类。</p> <p><strong>装饰</strong>，在现实的生活里，一个物品的装饰品，是可有可无的，也就是你把装饰去掉，这个东西还是一个完整的物品，不会因为装饰品的变化，而导致物品本身主体功能的变化。</p> <p>在编码层面就涉及到设计模式“装饰器模式”，在java的世界里最典型的案例就是给一个接口加日志。</p> <p>实际的代码看起来长这样</p> <div class="language-js extra-class"><pre class="language-js"><code>@ClassDecorator
+<span class="token keyword">class</span> <span class="token class-name">BpmnModuleImp</span> <span class="token punctuation">{</span>
+    @MethodDecorator
+    <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'call method!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>它可以修饰</p> <ul><li>类本身</li> <li>类的方法</li> <li>类的属性</li></ul> <p>装饰器本身的实现方法，请参考<a href="https://es6.ruanyifeng.com/#docs/decorator" target="_blank" rel="noopener noreferrer">ECMAScript 6入门 - 装饰器<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>因为装饰器的提案仍在变动，所以目前使用的还是老的装饰器规范。</p> <h2 id="为什么要用装饰器"><a href="#为什么要用装饰器" class="header-anchor">#</a> 为什么要用装饰器</h2> <p>在流程引擎建模器的实现里，核心依赖了Bpmn-js，它使用的架构是类似于java的依赖注入的方式，每一个完整的功能特性都是一个模块，在代码实现时，模块的具体表现为一个class类。</p> <h3 id="bpmn-js的模块定义"><a href="#bpmn-js的模块定义" class="header-anchor">#</a> Bpmn-js的模块定义</h3> <p>类似如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 某一个Feature的模块</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> $inject <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>代码分析：</p> <ul><li>声明依赖；它使用静态变量**$inject**来声明。</li> <li>依赖注入；依赖注入都会通过类的构造函数将依赖模块的实例注入到当前的模块里。</li> <li>私有化依赖；为了将依赖的模块提供给其他类方法使用，大部分场景下都会手动的将依赖的模块私有化成成员变量。</li></ul> <h3 id="bpmn-js模块编码时的问题"><a href="#bpmn-js模块编码时的问题" class="header-anchor">#</a> Bpmn-js模块编码时的问题</h3> <p>对于bpmn-js模块定义，在实际编码时会出现以下几个问题：</p> <ul><li>区分Bpmn模块和普通类模块；如果项目里加入了一个小伙伴，要对原来的一个feature做开发，他可能会迷失在类与类之间，来个显眼的装饰品，一眼就知道哪个是bpmn-js的模块，哪个是普通的类了~</li> <li>私有化依赖模块；如果一个模块的依赖项比较多时，你可能会花10分钟的时间把依赖的模块私有化成成员变量。</li> <li>编码难免会出现错误。因为不是typescript写的，没法做到在开发阶段就规避低级错误。之前在上线到生产环境时，就出现了把<code>$inject</code>写成<code>$injects</code>导致无法运行:-D。</li></ul> <h2 id="装饰器开发环境的准备"><a href="#装饰器开发环境的准备" class="header-anchor">#</a> 装饰器开发环境的准备</h2> <p>React我忘了，但是你如果使用vue-cli &gt; 3.0开发的话，自带的babel preset就自带装饰器的转义支持。</p> <p>如果你是自己定义的开发环境，使用的也是babel 7的话，安装babel插件：@babel/plugin-proposal-decorators</p> <p>并且将它配置到你的babel config里即可支持</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> i @babel/plugin-proposal-decorators --dev
+</code></pre></div><h2 id="装饰器应用"><a href="#装饰器应用" class="header-anchor">#</a> 装饰器应用</h2> <p>好了，开始实现我们的装饰器，既然是为bpmn模块服务的，那我就把装饰器命名为BpmnModule</p> <h3 id="标识模块"><a href="#标识模块" class="header-anchor">#</a> 标识模块</h3> <p>来解决第一个问题，区分普通类和bpmn模块。</p> <p>我们要做的是，将$inject声明用装饰器注入，统一写法，避免错别字。</p> <p>装饰器实现如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// BpmnModuleDecorator.js</span>
+<span class="token comment">/**
+ * Bpmn模块装饰器
+ * @param {{ injects: string[] }} param0
+ **/</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> injects <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">moduleCtor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        moduleCtor<span class="token punctuation">.</span>$inject <span class="token operator">=</span> injects<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>让我们来改造原始的bpmn模块定义</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> BpmnModule <span class="token keyword">from</span> <span class="token string">'./BpmnModuleDecorator'</span><span class="token punctuation">;</span>
+
+@<span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> FeatureModule<span class="token punctuation">;</span>
+</code></pre></div><p>这里有个注意点，不能直接把export default和装饰器一起写，语法解析会报错。</p> <p>以下是<strong>错误</strong>使用方式：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> BpmnModule <span class="token keyword">from</span> <span class="token string">'./BpmnModuleDecorator'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 会报错</span>
+@<span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>具体原因是转义后代码的执行语义变了</p> <p>export default在webpack中转义后变成了module.exports；加上装饰器本身就是一个高阶函数，所以编译以后的执行结果就变了，还是直接上代码吧。</p> <p>正确的编译：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> $inject <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">BpmnModule</span><span class="token punctuation">(</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token punctuation">(</span>
+    FeatureModule
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>错误语法的编译：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">BpmnModule</span><span class="token punctuation">(</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token punctuation">(</span>
+    module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> $inject <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre></div><p>执行语义变了，不过我没看过错误的编译结果，因为报错了，肯本没结果，哈哈~</p> <h3 id="自动化私有化依赖模块"><a href="#自动化私有化依赖模块" class="header-anchor">#</a> 自动化私有化依赖模块</h3> <p>上面实现了简单装饰器，咋一看真多余啊，还多写一个函数；</p> <p>但是也是为了当前这件事情做铺垫。</p> <h4 id="实现效果"><a href="#实现效果" class="header-anchor">#</a> 实现效果</h4> <p>我们现在要做的事情就是把下面注释的代码给自动化了~</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> BpmnModule <span class="token keyword">from</span> <span class="token string">'./BpmnModuleDecorator'</span><span class="token punctuation">;</span>
+
+@<span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">eventBus</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus <span class="token operator">=</span> eventBus<span class="token punctuation">;</span> <span class="token comment">// 这些私有化代码要去掉</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> FeatureModule<span class="token punctuation">;</span>
+</code></pre></div><p>效果就是<strong>不需要编写任何私有化依赖模块的代码</strong>，如下</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> BpmnModule <span class="token keyword">from</span> <span class="token string">'./BpmnModuleDecorator'</span><span class="token punctuation">;</span>
+
+@<span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    injects<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'eventBus'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">FeatureModule</span> <span class="token punctuation">{</span>
+    <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_eventBus<span class="token punctuation">)</span> <span class="token comment">// 输出依赖的模块</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> FeatureModule<span class="token punctuation">;</span>
+</code></pre></div><p>在实际实现的过程中，你会发现装饰器它本身<strong>只能修改</strong>传递进来的构造函数，你没法对其模块的实例进行操作。而我们要自动化私有依赖模块又是要操作模块实例，所以会很矛盾，所以只能想特殊的办法，那就是套娃！</p> <h4 id="具体实现"><a href="#具体实现" class="header-anchor">#</a> 具体实现</h4> <p>先上代码~</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// BpmnModuleDecorator.js</span>
+<span class="token comment">/**
+ * Bpmn模块装饰器
+ * @param {{ injects: string[] }} param0
+ **/</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">BpmnModule</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> injects <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    injects <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>injects<span class="token punctuation">)</span> <span class="token operator">?</span> injects <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">moduleCtor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 模块代理</span>
+        <span class="token keyword">function</span> <span class="token function">ModuleProxy</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>injectedModules</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 创建目标对象</span>
+            <span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Target</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 将依赖注入变成模块实例私有变量</span>
+            injects<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">moduleName<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                instance<span class="token punctuation">[</span><span class="token string">'_'</span> <span class="token operator">+</span> moduleName<span class="token punctuation">]</span> <span class="token operator">=</span> injectedModules<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 返回实例，替换代理new调用的返回结果</span>
+            <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        ModuleProxy<span class="token punctuation">.</span>$inject <span class="token operator">=</span> injects<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>实现的思路：</p> <ul><li>代理模块的创建操作</li> <li>运用new构造调用的特性</li></ul> <p>原理：</p> <ul><li><p>代理；即把bpmn创造模块时的操作给代理了，目的是为了拿到构造调用传进来的依赖注入列表。</p></li> <li><p>new构造调用的特性；主要运用了javascript在new调用时，如果函数返回的是对象的话，它会把这个返回的对象替换new调用创建的对象。(不知道的小伙伴得好好补补new调用的课~)</p></li></ul> <h2 id="ps"><a href="#ps" class="header-anchor">#</a> ps</h2> <p>有机会租个自己的服务器吧，没法让网友发表评论[doge]</p></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----> <!----></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/blog/assets/js/app.03cb820c.js" defer></script><script src="/blog/assets/js/3.c57994e2.js" defer></script><script src="/blog/assets/js/1.385f6529.js" defer></script><script src="/blog/assets/js/11.8c55c784.js" defer></script>
+  </body>
+</html>
