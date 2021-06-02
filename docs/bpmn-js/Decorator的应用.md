@@ -159,7 +159,6 @@ export default在webpack中转义后变成了module.exports；加上装饰器本
 
 ```js
 class FeatureModule {
-    static $inject = ['eventBus'];
     constructor(eventBus) {
         this._eventBus = eventBus;
     }
@@ -179,7 +178,6 @@ BpmnModule(
     injects: ['eventBus']
 )(
     module.exports = class FeatureModule {
-        static $inject = ['eventBus'];
         constructor(eventBus) {
             this._eventBus = eventBus;
         }
