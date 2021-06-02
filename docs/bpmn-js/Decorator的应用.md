@@ -229,9 +229,31 @@ class FeatureModule {
 export default FeatureModule;
 ```
 
-在实际实现的过程中，你会发现装饰器它本身**只能修改**传递进来的构造函数，你没法对其模块的实例进行操作。而我们要自动化私有依赖模块又是要操作模块实例，所以会很矛盾，所以只能想特殊的办法，那就是套娃！
+为了让各位老爷们感受到私有化的恶臭，举个个恶臭的例子，以下案例为真实改编：
+
+```js
+/**
+ * ExtensionElements子元素的快捷操作模块
+ **/
+@BpmnJSModule({
+  injects: ['canvas', 'eventBus', 'bpmnFactory', 'modeling', 'elementHelper', 'elementFactory', 'elementRegistry']
+})
+class ExtensionElementsHelper {
+    constructor(canvas, eventBus, bpmnFactory, modeling, elementHelper, elementFactory, elementRegistry) {
+        this._canvas = canvas;
+        this._eventBus = eventBus;
+        this._bpmnFactory = bpmnFactory;
+        this._modeling = modeling;
+        this._elementHelper = elementHelper;
+        this._elementFactory = elementFactory;
+        this._elementRegistry = elementRegistry;
+    }
+}
+```
 
 #### 具体实现
+
+在实际实现的过程中，你会发现装饰器它本身**只能修改**传递进来的构造函数，你没法对其模块的实例进行操作。而我们要自动化私有依赖模块又是要操作模块实例，所以会很矛盾，所以只能想特殊的办法，那就是套娃！
 
 先上代码~
 
