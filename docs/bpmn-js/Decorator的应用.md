@@ -250,6 +250,7 @@ export default function BpmnModule({ injects }) {
     return function (moduleCtor) {
         // 模块代理
         function ModuleProxy(...injectedModules) {
+            // injectedModules为bpmn-js给的模块实例化列表
             // 创建目标对象
             const instance = new Target();
             // 将依赖注入变成模块实例私有变量
@@ -260,14 +261,18 @@ export default function BpmnModule({ injects }) {
             return instance;
         }
 
+        // 将依赖声明复制给代理
         ModuleProxy.$inject = injects;
+
+        // 返回代理模块，让bpmn-js去处理它
+        return ModuleProxy;
     }
 }
 ```
 
 实现的思路：
 
-- 代理模块的创建操作
+- 代理设计模式，代理模块的创建操作
 - 运用new构造调用的特性
 
 原理：
