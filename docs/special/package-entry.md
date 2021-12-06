@@ -29,7 +29,7 @@ import Vue from 'vue'
 
 在vue官网的[安装章节](https://cn.vuejs.org/v2/guide/installation.html)，你会看到各式各样的构建版本，每一个版本都存放在指定的目录里。
 
-![vue的编译版本](./images/vue不同的编译版本.png)
+![vue的编译版本](./images/vue-bundle-version.png)
 
 那当你在项目里使用vue的时候，打包工具是如何知道它应该使用哪个版本的呢？
 
@@ -40,10 +40,6 @@ import Vue from 'vue'
 - 为什么会出现这些入口种类？
 - 作为**包作者**，应该如何正确的声明它？
 - 作为**包的使用者**，应该如何正确的使用它？
-
-## 本文目录
-
-[[toc]]
 
 ## 如何声明包的入口
 
@@ -249,7 +245,6 @@ module.exports = {
 ![image-20211206221708437](./images/image-20211206221708437.png)
 
 对于其他browser，module，main的情景，优先级配置被实现于@rollup/plugin-node-resolve的配置项的[mainFields](https://github.com/rollup/plugins/tree/master/packages/node-resolve#mainfields)中。
-
 
 ## 参考资料
 
