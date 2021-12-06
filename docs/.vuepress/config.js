@@ -5,15 +5,14 @@ module.exports = {
   theme: "reco",
   themeConfig: {
     authorAvatar: "/author.jpeg",
+    subSidebar: 'auto',
     modePicker: true,
     noFoundPageByTencent: false,
     type: "blog",
-    valineConfig: {
-      showComment: false,
-    },
     nav: [
       { text: "首页", link: "/" },
       { text: "Github", link: "https://github.com/longshihui/blog", target: '_blank' },
     ]
   },
+  plugins: ['@vuepress/medium-zoom']
 };

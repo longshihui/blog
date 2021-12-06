@@ -1,12 +1,10 @@
 ---
 title: 如何在package.json中正确声明包的入口
-date: 2021年12月6日22:13:07
+date: 2021-12-6
 categories:
  - npm
- - 规范
  - nodejs
 tags:
- - 规范
  - npm
  - nodejs
 ---

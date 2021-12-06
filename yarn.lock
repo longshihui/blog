@@ -1238,7 +1238,14 @@
   dependencies:
     tslib "^2.0.1"
 
-"@vuepress-reco/core@^1.6.9":
+"@vue/composition-api@^1.0.0-beta.20":
+  version "1.4.1"
+  resolved "https://registry.npmmirror.com/@vue/composition-api/download/@vue/composition-api-1.4.1.tgz#2b4a6bfabc5e8277c4b890e0c9ca55d1252ca5b8"
+  integrity sha512-ZTat9ru/rwecveRnFzlO2mduOBpGfnBdXn+WtBcFLV9UsL/D+6nX47RWuLiVdNxNDX0qphGZRC+JDjwt+YTnRA==
+  dependencies:
+    tslib "^2.3.1"
+
+"@vuepress-reco/core@^1.6.2":
   version "1.6.9"
   resolved "https://registry.npmmirror.com/@vuepress-reco/core/download/@vuepress-reco/core-1.6.9.tgz#2bec013dfe11f712dedd06683981ddc4d5a977e7"
   integrity sha512-R+PvVvJ2efPwDboTLW/l1Gabl3UsfmuuO+MhbnUtFn1LrxCM3UfCSCeIdIijLR03UoLwkEQc3Ei94gBV5srAeg==
@@ -1374,6 +1381,13 @@
   version "1.5.0"
   resolved "https://registry.npmmirror.com/@vuepress/plugin-medium-zoom/download/@vuepress/plugin-medium-zoom-1.5.0.tgz#99a574f6c52570ae16be3de529bdc556d09f88fe"
   integrity sha1-maV09sUlcK4Wvj3lKb3FVtCfiP4=
+  dependencies:
+    medium-zoom "^1.0.4"
+
+"@vuepress/plugin-medium-zoom@^1.8.2":
+  version "1.8.2"
+  resolved "https://registry.npmmirror.com/@vuepress/plugin-medium-zoom/download/@vuepress/plugin-medium-zoom-1.8.2.tgz#0243dd27edf0c710f9a41a234d253d76ab51e625"
+  integrity sha1-AkPdJ+3wxxD5pBojTSU9dqtR5iU=
   dependencies:
     medium-zoom "^1.0.4"
 
@@ -8011,7 +8025,7 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-tslib@^2.0.1:
+tslib@^2.0.1, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://registry.nlark.com/tslib/download/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
@@ -8534,13 +8548,13 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress-theme-reco@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.npmmirror.com/vuepress-theme-reco/download/vuepress-theme-reco-1.6.9.tgz#72b8adb81ab444e0388a2207e944818e0eda5c4e"
-  integrity sha512-qYGZ15jJCfHfX4MHByIvFJCtM0UdVEoy5htAq9mmMPpQPRk9LRr2LPQOOaxuBYme5m1KbZ090vsyzKfCdfklUg==
+vuepress-theme-reco@1.6.6:
+  version "1.6.6"
+  resolved "https://registry.npmmirror.com/vuepress-theme-reco/download/vuepress-theme-reco-1.6.6.tgz#f286f0000b1702b9511a439469c15b0d2b1e992d"
+  integrity sha1-8obwAAsXArlRGkOUacFbDSsemS0=
   dependencies:
-    "@vue/composition-api" "1.0.0-beta.21"
-    "@vuepress-reco/core" "^1.6.9"
+    "@vue/composition-api" "^1.0.0-beta.20"
+    "@vuepress-reco/core" "^1.6.2"
     "@vuepress-reco/vuepress-plugin-back-to-top" "^1.6.0"
     "@vuepress-reco/vuepress-plugin-comments" "^1.6.0"
     "@vuepress-reco/vuepress-plugin-loading-page" "^1.6.0"
