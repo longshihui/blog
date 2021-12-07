@@ -248,6 +248,10 @@ module.exports = {
 
 对于其他browser，module，main的情景，优先级配置被实现于@rollup/plugin-node-resolve的配置项的[mainFields](https://github.com/rollup/plugins/tree/master/packages/node-resolve#mainfields)中。
 
+### CDN的用户
+
+你们开心就好。
+
 ## 参考资料
 
 - [npm package.json 文档](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
