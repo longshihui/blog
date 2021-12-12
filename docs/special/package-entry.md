@@ -11,19 +11,21 @@ tags:
 
 # 包入口
 
-在日常开发中使用别人封装好的npm包是一件很常见的事情，工作中也会提炼自己经常重复性复制粘贴的代码变成包去分享给其他模块去使用。
+在日常开发中使用别人封装好的npm包是一件很常见的事情，工作中也会提炼自己经常重复性代码变成包分享给其他模块去使用。
 
-当要去封装一个npm包时，就需要站在包使用者的角度去考虑如何设计你的npm包。
+当封装一个npm包时，就需要站在包使用者的角度去考虑如何设计你的npm包。
 
-其中最重要的就是“入口”，因为使用你代码都会经过**import**，你的包，打包工具就会默认去根据一定的规则去查找对应的包入口，从而读取到npm包里面的内容。
+其中最重要的就是“入口”，因为使用你代码都会经过**import**或者其他方式被引用，从而读取到npm包里面的内容。
 
-这个
+例如打包工具webpack或者rollup，他们会根据一定的规则去查找你的包入口。
 
-例如，最常见的就是vue的使用
+例如，在代码里使用vue
 
 ```javascript
 import Vue from 'vue'
 ```
+
+## 准备工作
 
 在vue官网的[安装章节](https://cn.vuejs.org/v2/guide/installation.html)，你会看到各式各样的构建版本，每一个版本都存放在指定的目录里。
 
@@ -48,11 +50,13 @@ npm包都会有一个包描述文件，它叫**package.json**，用来描述包�
 
 - main
 - browser
-
-当然，在社区中仍存在其他没有被官方收录的入口字段，例如：
-
 - module
+
+当然，在社区中存在比较新的模块导出声明，例如：
+
 - exports
+
+具体的声明实例，可以参考vue官方仓库。
 
 例如vue的package.json
 
@@ -165,7 +169,7 @@ Subpath exports为子路径的快捷导出。
 1. 包作者需要将源代码一起publish到npm仓库
 2. 用户需要知道包的目录结构
 
-例如，当你在使用element-ui进行业务开发时，忽然你发现你对element-uid的```el-scrollbar```组件感兴趣，你想要引用它，但是它并没出现在element-ui 显式exports中，然后你就会在自己的代码中写下如下代码
+例如，当你在使用element-ui进行业务开发时，忽然你发现你对element-ui的```el-scrollbar```组件感兴趣，你想要引用它，但是它并没出现在element-ui 显式exports中，然后你就会在自己的代码中写下如下代码
 
 ```js
 import ElScrollbar from 'element-ui/packages/el-scrollbar';
@@ -216,8 +220,8 @@ import submodule from 'es-module-package/private-module.js';
 | ------- | ---------------------------- | ----------------------------------------------------- | --------------------------- |
 | main    | 需要                         | 需要                                                  | 需要                        |
 | browser | 需要                         | 不需要                                                | 需要                        |
-| module  | 需要声明(提供给打包工具优化) | 需要                                                  | 需要                        |
-| exports | 可选声明                     | Nodejs < 12时，无需声明<br />Nodejs >= 12时，可选声明 | 可选                        |
+| module  | 需要 (提供给打包工具优化) | 需要                                                  | 需要                        |
+| exports | 可选                    | Nodejs < 12时，无需声明<br />Nodejs >= 12时，可选声明 | 可选                        |
 
 ## 作为包的使用者，如何正确使用?
 
@@ -243,6 +247,10 @@ module.exports = {
 ![image-20211206221708437](./images/image-20211206221708437.png)
 
 对于其他browser，module，main的情景，优先级配置被实现于@rollup/plugin-node-resolve的配置项的[mainFields](https://github.com/rollup/plugins/tree/master/packages/node-resolve#mainfields)中。
+
+### CDN的用户
+
+你们开心就好。
 
 ## 参考资料
 
