@@ -1,22 +1,16 @@
 ---
 title: 你不知道的Virtual DOM
-date: 2021-12-13
+date: 2021-12-14
 categories:
  - Web
 tags:
  - MVVM
- - javascript
+ - 架构
 ---
 
 # 你不知道的Virtual DOM
 
-目录
-
-- 什么是Virtual DOM?
-- Virtual DOM解决了什么问题？
-- Virtual DOM由哪些组成部分?
-- 如何对Virtual DOM更细粒度控制？
-- 适用场景及实战案例
+[toc]
 
 ## 什么是Virtual DOM？
 
@@ -28,7 +22,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 你可能会问，那为什么Vue，React等主流MVVM框架为什么不直接用DOM？
 
-这就不得不提VNode的特点了。
+那就得知道Virtual DOM解决了什么问题。
 
 ## Virtual DOM解决了什么问题？
 
@@ -54,6 +48,8 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 原来需要手动维护的**渲染到视图、监听视图变化更新数据、将新的变化再一次渲染到视图**，这三层关系，**由MVVM框架来统一托管**。
 
+//TODO 补充对比图
+
 其中MVVM里的vm，最核心的就是使用Virtual DOM来维护页面。
 
 那么为什么数据同步需要用到Virtual DOM？
@@ -62,7 +58,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM Element，需要Diff的东西少。
 
-// TODO 补充VNode实例和DOM Element对比图
+//TODO 补充VNode实例和DOM Element对比图
 
 **第二，增强了组件化的实现**
 
@@ -80,9 +76,13 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
 
 有了以上信息，就足够描述我们的页面了。
 
-## 如何对Virtual DOM更细粒度控制？
+// TODO 补充VNode结构图
 
-### SFC(单文件组件)
+## 如何利用Virtual DOM？
+
+### 实际编码的使用
+
+**SFC(单文件组件)**
 
 移除template元素，使用render函数代替
 
@@ -104,13 +104,9 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
         }
     }
 </script>
-```
 
-使用vue的jsx语法可以更直观
-
-```jsx
 <script>
-    // Vue组件
+    // jsx版本
     export default {
         render() {
             // <div id="el"></div>
@@ -121,13 +117,11 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
 </script>
 ```
 
-
-
-### 在js文件中
+**在js文件中**
 
 VNode的创建和jsx其实也可以在普通的js文件中使用，只需要引用了vue的createElement函数即可
 
-```js
+```jsx
 /**
 * 创建select元素
 * @param {VueComponent.createElement} createElement
@@ -144,11 +138,7 @@ function genSelectVNode(createElement, options) {
     });
     return createElement('select', optionsVNodeList);
 }
-```
 
-也可以使用jsx
-
-```jsx
 /**
 * 创建select元素
 * @param {VueComponent.createElement} createElement
@@ -159,7 +149,7 @@ function genSelectVNode(createElement, options) {
 *  <option value="b"> B </option>
 * </select>
 */
-function genSelectVNode(createElement, options) {
+function genSelectVNodeForJSX(createElement, options) {
     const optionsVNodeList = options.map(function ({ label, value }) {
         return <option value={value}>{label}</option>
     });
@@ -167,13 +157,23 @@ function genSelectVNode(createElement, options) {
 }
 ```
 
+## 使用时注意事项
 
+**1. 小心Diff算法，VNode key的合理使用**
+
+// TODO简单讲解Virtual DOM的diff
+
+**2. 每个一个Virtual DOM树里的VNode均是唯一的**
+
+//TODO check一下相同时会发生什么
 
 ## 适用场景及实战案例
 
-### 创建函数式组件
+### 场景1：函数式组件
 
-创建一个Alert，用于提示用户的信息
+函数式组件多适用于那些一次性业务场景，它属于临时性的执行，执行完即回收。
+
+例如，创建一个Alert，用于提示用户的信息
 
 ```jsx
 // MyAlert.js
@@ -224,14 +224,18 @@ MyAlert(function (createElement) {
 });
 ````
 
-### 设计灵活度更高的组件
+### 场景2：灵活度更高的组件
 
-设计可配置化的代码
+- 高度配置化的组件（举例，TypeDataTable的设计)
+- 改良原有的代码设计，提升可维护性，可读性，高度模块化。（举例，TypeDataTable的设计)
+- 实现一些只有javascript才能实现特殊渲染逻辑。(举例，DataTable的高级检索)
 
-### 组件的单元测试
+### 场景3：组件的单元测试
 
-组件的单元测试可以完全不依赖于浏览器环境而在Node环境下执行，完成对组件的单元测试。
+- 脱离浏览器环境进行组件本身的逻辑测试，分支测试，语句测试等单元级别的测试。
+- 代码少，速度快，在大量测试用例下，能够节省CI资源的消耗。
 
-### 服务器端渲染
+### 场景4：服务器端渲染
 
-对于需要良好SEO的网站而言，可以利用Virtual DOM更容易的复用前端的代码实现服务端渲染，并且实现前端代码的复用和服务端渲染技术的同构，降低维护成本。
+- 需要良好的SEO
+- 降低维护成本，实现前端代码和服务端渲染技术的同构
