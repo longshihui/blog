@@ -1,4 +1,3 @@
----
 title: 你不知道的Virtual DOM
 date: 2021-12-14
 categories:
@@ -6,7 +5,6 @@ categories:
 tags:
  - MVVM
  - 架构
----
 
 # 你不知道的Virtual DOM
 
@@ -48,7 +46,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 原来需要手动维护的**渲染到视图、监听视图变化更新数据、将新的变化再一次渲染到视图**，这三层关系，**由MVVM框架来统一托管**。
 
-//TODO 补充对比图
+![MVVM](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\MVVM.png)
 
 其中MVVM里的vm，最核心的就是使用Virtual DOM来维护页面。
 
@@ -58,7 +56,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM Element，需要Diff的东西少。
 
-//TODO 补充VNode实例和DOM Element对比图
+![diff](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\diff-16394492438552-16394492492413.png)
 
 **第二，增强了组件化的实现**
 
@@ -76,7 +74,7 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
 
 有了以上信息，就足够描述我们的页面了。
 
-// TODO 补充VNode结构图
+![VNode](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\VNode.png)
 
 ## 如何利用Virtual DOM？
 
@@ -157,15 +155,13 @@ function genSelectVNodeForJSX(createElement, options) {
 }
 ```
 
-## 使用时注意事项
+### 框架是如何将Virtual DOM转换成实际的DOM
 
-**1. 小心Diff算法，VNode key的合理使用**
+**小心Diff算法，VNode key的合理使用**
 
-// TODO简单讲解Virtual DOM的diff
+![vue-diff](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\vue-diff.png)
 
-**2. 每个一个Virtual DOM树里的VNode均是唯一的**
-
-//TODO check一下相同时会发生什么
+> 关于key的官方说明：https://cn.vuejs.org/v2/api/#key
 
 ## 适用场景及实战案例
 
@@ -200,7 +196,7 @@ function MyAlert(messageGenerator) {
        }
     })
     
-    const alert = MyAlertComponent();
+    const alert = new MyAlertComponent();
     
     alert.$mount();
     
@@ -224,7 +220,7 @@ MyAlert(function (createElement) {
 });
 ````
 
-### 场景2：灵活度更高的组件
+### 场景2：设计灵活度更高的组件
 
 - 高度配置化的组件（举例，TypeDataTable的设计)
 - 改良原有的代码设计，提升可维护性，可读性，高度模块化。（举例，TypeDataTable的设计)
