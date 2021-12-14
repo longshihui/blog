@@ -47,7 +47,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 原来需要手动维护的**渲染到视图、监听视图变化更新数据、将新的变化再一次渲染到视图**，这三层关系，**由MVVM框架来统一托管**。
 
-![MVVM](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\MVVM.png)
+![MVVM](./virtual-dom.assets/MVVM.png)
 
 其中MVVM里的vm，最核心的就是使用Virtual DOM来维护页面。
 
@@ -57,7 +57,7 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM Element，需要Diff的东西少。
 
-![diff](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\diff-16394492438552-16394492492413.png)
+![diff](./virtual-dom.assets/diff-16394492438552-16394492492413.png)
 
 **第二，增强了组件化的实现**
 
@@ -75,7 +75,7 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
 
 有了以上信息，就足够描述我们的页面了。
 
-![VNode](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\VNode.png)
+![VNode](./virtual-dom.assets/VNode.png)
 
 ## 如何利用Virtual DOM？
 
@@ -158,7 +158,7 @@ function genSelectVNodeForJSX(createElement, options) {
 
 ### 框架是如何将Virtual DOM转换成实际的DOM
 
-![vue-diff (1)](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\vue-diff (1).png)
+![vue-diff (1)](./virtual-dom.assets/vue-diff (1).png)
 
 1. render 根据Model创建新的Virtual DOM
 2. diff, 找出两个tree之间的最小编辑距离
@@ -168,7 +168,7 @@ function genSelectVNodeForJSX(createElement, options) {
 
 Vue采用的是双指针层级对比方法。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
 
-![Diff (1)](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\Diff (1).png)
+![Diff (1)](./virtual-dom.assets/Diff (1).png)
 
 **判断是否两个节点是否相等**
 
