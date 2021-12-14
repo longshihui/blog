@@ -1,3 +1,4 @@
+---
 title: 你不知道的Virtual DOM
 date: 2021-12-14
 categories:
@@ -5,7 +6,7 @@ categories:
 tags:
  - MVVM
  - 架构
-
+---
 # 你不知道的Virtual DOM
 
 [toc]
