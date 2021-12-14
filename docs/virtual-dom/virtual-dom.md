@@ -167,6 +167,8 @@ function genSelectVNodeForJSX(createElement, options) {
 
 Vue采用的是双指针层级对比方法。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
 
+![Diff (1)](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\Diff (1).png)
+
 **判断是否两个节点是否相等**
 
 ```js
