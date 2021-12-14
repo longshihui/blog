@@ -13,19 +13,15 @@ tags:
 
 ## 什么是Virtual DOM？
 
-VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成部分。
+虚拟DOM，是目前主流MVVM前端框架的组成部分。
 
 最初诞生的目的是前端工程化解决方案中的一个技术点。
 
 主要的职责如同**DOM元素一样**，用于**描述页面**的结构。
 
-你可能会问，那为什么Vue，React等主流MVVM框架为什么不直接用DOM？
-
-那就得知道Virtual DOM解决了什么问题。
-
 ## Virtual DOM解决了什么问题？
 
-解决了目前阶段Web开发的工程化问题。
+**解决了目前阶段Web开发的工程化问题。**
 
 这就不得不提MVVM框架，Vue和React等等都是MVVM框架的实现。
 
@@ -57,12 +53,16 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 MVVM实现Model自动同步到View面临两个问题：
 
-- 监听变化(数据变化，视图变化)
+- 监听变化
+  - 数据变化，Observer(观察者模式)
+  - 视图变化，Tree Diff（树对比）
 - 同步更新
+  - 更新数据
+  - 更新视图
 
 
 
-而Virtual DOM在视图变化中有两个优势：
+而Virtual DOM在**视图变化**中有两个优势：
 
 
 
@@ -74,17 +74,34 @@ Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM El
 
 **第二，增强了组件化的实现**
 
-1. 提前尝鲜。VNode可以实现插槽(Slot)等Web Component里才有的前沿技术，并把它们搬到大多数浏览器上。
-2. 提升代码可维护性，开发者能够在创建自己页面的时候，能够更佳直观的知道代码中的模块关系。
+1. 提前尝鲜。VNode可以实现插槽(Slot)，自定义标签(Custom Element) 等**Web Component**规范里才有的前沿技术，并把它们搬到大多数浏览器上。
+2. 提升代码可维护性
+   1. 更佳直观了解组件之间的关系。
+   2. 更容易的拆分逻辑。
+
 
 ## Virtual DOM由哪些组成部分?
 
 这里仅仅讨论Vue里的Virtual DOM实现，Virtual DOM由一个个VNode组成，VNode由以下几个部分组成
 
 - 入参：Props和DOM Props和DOM Attrs
+  - Props为自定义组件的入参
+  - DOM Props为不能被序列化至DOM标签上的属性
+  - DOM Attrs 为能被序列化至DOM标签上的属性
+
 - 样式: class和style
+  - static class，静态的class
+  - class ，和状态绑定的class
+  - style，行内样式
+
 - 事件: on和nativeOn
+  - on，处理自定义组件的自定义事件
+  - nativeOn，DOM原生的事件
+
 - 插槽: slot和scopedSlots
+  - slot，纯插槽
+  - scopedSlots，作用域插槽，主要用于将组件内部数据的渲染职能开放给父级组件
+
 
 有了以上信息，就足够描述我们的页面了。
 
@@ -151,6 +168,8 @@ function genSelectVNode(createElement, options) {
     return createElement('select', optionsVNodeList);
 }
 
+//------------------------------------------------------------------------------------------------------------
+
 /**
 * 创建select元素
 * @param {VueComponent.createElement} createElement
@@ -171,22 +190,33 @@ function genSelectVNodeForJSX(createElement, options) {
 
 ### 框架是如何将Virtual DOM转换成实际的DOM
 
-![vue-diff (1)](./virtual-dom.assets/vue-diff.png)
+![vue-diff](virtual-dom.assets/vue-diff-16394645506724.png)
 
-1. render 根据Model创建新的Virtual DOM
+1. render，根据Model创建新的Virtual DOM
 2. diff, 找出两个tree之间的最小编辑距离
 3. patch，打开一个缓冲区，将最小编辑距离存入缓冲区，待下一帧绘制前同步至页面
 
-### 控制Diff算法
+### 控制diff算法
 
-Vue采用的是双指针层级对比方法。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
+Vue采用的是**双指针层级对比**方法，是**简单最小编辑距离**的查找的贪心实现。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
 
-![Diff (1)](./virtual-dom.assets/diff.png)
+![vue-diff](virtual-dom.assets/vue-diff-16394658190047.png)
+
+贪心的部分：
+
+- 当VNode发生变化时，放弃对孩子节点的对比，视为**发生变化**。
+- 当VNode指定**key**属性时，优先比对，若不相同时，则视为**未变化**
+
+
 
 **判断是否两个节点是否相等**
 
+以下是vue源码用于判断两个VNode节点是否相同的代码片段。
+
 ```js
-// 判断两个节点是否相同
+// 代码来自Vue virtual dom代码片段
+// 完整代码：https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js
+// 判断两个VNode是否相同
 function sameVnode (a, b) {
   return (
     a.key === b.key && // 优先使用key判断
@@ -214,6 +244,8 @@ function sameVnode (a, b) {
 > 关于key的官方说明：https://cn.vuejs.org/v2/api/#key
 
 ## 适用场景及实战案例
+
+[示例代码仓库](https://github.com/longshihui/vitrual-dom-examples)
 
 ### 场景1：函数式组件
 
@@ -272,9 +304,9 @@ MyAlert(function (createElement) {
 
 ### 场景2：设计灵活度更高的组件
 
-- 高度配置化的组件（举例，TypeDataTable的设计)
-- 改良原有的代码设计，提升可维护性，可读性，高度模块化。（举例，TypeDataTable的设计)
-- 实现一些只有javascript才能实现特殊渲染逻辑。(举例，DataTable的高级检索)
+- 高度配置化的组件
+- 改良原有的代码设计，提升可维护性，可读性，高度模块化。
+- 实现一些只有javascript才能实现特殊渲染逻辑。
 
 ### 场景3：组件的单元测试
 
@@ -285,3 +317,10 @@ MyAlert(function (createElement) {
 
 - 需要良好的SEO
 - 降低维护成本，实现前端代码和服务端渲染技术的同构
+
+
+
+## 参考文献
+
+- [Vue渲染函数](https://cn.vuejs.org/v2/guide/render-function.html)
+- [Vue源码](https://github.com/vuejs/vue)
