@@ -157,9 +157,43 @@ function genSelectVNodeForJSX(createElement, options) {
 
 ### 框架是如何将Virtual DOM转换成实际的DOM
 
-**小心Diff算法，VNode key的合理使用**
+![vue-diff (1)](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\vue-diff (1).png)
 
-![vue-diff](E:\Github-Projects\blog\docs\virtual-dom\virtual-dom.assets\vue-diff.png)
+1. render 根据Model创建新的Virtual DOM
+2. diff, 找出两个tree之间的最小编辑距离
+3. patch，打开一个缓冲区，将最小编辑距离存入缓冲区，待下一帧绘制前同步至页面
+
+### 控制Diff算法
+
+Vue采用的是双指针层级对比方法。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
+
+**判断是否两个节点是否相等**
+
+```js
+// 判断两个节点是否相同
+function sameVnode (a, b) {
+  return (
+    a.key === b.key && // 优先使用key判断
+    a.asyncFactory === b.asyncFactory && (
+      (
+        a.tag === b.tag &&
+        a.isComment === b.isComment &&
+        isDef(a.data) === isDef(b.data) &&
+        sameInputType(a, b)
+      ) || (
+        isTrue(a.isAsyncPlaceholder) &&
+        isUndef(b.asyncFactory.error)
+      )
+    )
+  )
+}
+
+```
+
+通过控制key值，可以实现
+
+1. 控制DOM元素的复用，实现静态渲染
+2. 强制刷新DOM元素
 
 > 关于key的官方说明：https://cn.vuejs.org/v2/api/#key
 
