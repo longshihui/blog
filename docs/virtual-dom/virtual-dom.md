@@ -53,6 +53,19 @@ VNode全称Virtual DOM，叫虚拟DOM，是目前主流MVVM前端框架的组成
 
 那么为什么数据同步需要用到Virtual DOM？
 
+
+
+MVVM实现Model自动同步到View面临两个问题：
+
+- 监听变化(数据变化，视图变化)
+- 同步更新
+
+
+
+而Virtual DOM在视图变化中有两个优势：
+
+
+
 **第一，它没有DOM Element那么重**
 
 Diff性能高，VNode相当于阉割版的DOM Element，属性少，相比DOM Element，需要Diff的东西少。
