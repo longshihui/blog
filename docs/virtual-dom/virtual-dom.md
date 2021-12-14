@@ -171,7 +171,7 @@ function genSelectVNodeForJSX(createElement, options) {
 
 ### 框架是如何将Virtual DOM转换成实际的DOM
 
-![vue-diff (1)](./virtual-dom.assets/vue-diff (1).png)
+![vue-diff (1)](./virtual-dom.assets/vue-diff.png)
 
 1. render 根据Model创建新的Virtual DOM
 2. diff, 找出两个tree之间的最小编辑距离
@@ -181,7 +181,7 @@ function genSelectVNodeForJSX(createElement, options) {
 
 Vue采用的是双指针层级对比方法。具体的[代码实现的updateChildren函数](https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js)
 
-![Diff (1)](./virtual-dom.assets/Diff (1).png)
+![Diff (1)](./virtual-dom.assets/diff.png)
 
 **判断是否两个节点是否相等**
 
